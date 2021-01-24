@@ -1,0 +1,33 @@
+  <nav class="navbar navbar-expand-lg navbar-light altura">
+    <a class="navbar-brand marca" href="#">
+        <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-top">
+        Fiducia
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="[ '/' ]" routerLinkActive="active">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="[ '/Novedades' ]" routerLinkActive="active">Novedades</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Detalles
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" [routerLink]="[ '/Detalles/BoxSorpresa' ]" routerLinkActive="active">Box sorpresa</a>
+              <a class="dropdown-item" [routerLink]="[ '/Detalles/BoxFloral' ]" routerLinkActive="active">Box floral</a>
+              <a class="dropdown-item" [routerLink]="[ '/Detalles/Globos' ]" routerLinkActive="active">Globos</a>
+              <a class="dropdown-item" [routerLink]="[ '/Detalles/Flores' ]" routerLinkActive="active">Flores</a>
+            </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="[ '/Contacto' ]" routerLinkActive="active">Contacto</a>
+        </li>
+      </ul>
+    </div>
+  </nav>

@@ -1,0 +1,10 @@
+<div class="container mt-3 mb-5 text-center">
+    <h1>Categorías</h1>
+    <br>
+    <div class="row">
+        <div *ngFor="let source of sources; let i = index" class="col">
+            <img [src]=source class="img-blobo mb-1 rounded-circle" alt="">
+            <h4><b>{{categorias[i]}}</b></h4>
+        </div>
+    </div>
+</div>

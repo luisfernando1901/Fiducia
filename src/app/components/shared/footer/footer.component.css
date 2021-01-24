@@ -1,0 +1,15 @@
+.footer{
+    background-color: #f7f7f7;
+
+    min-height: 50px;
+    vertical-align: middle;
+}
+.footer-img{
+    height: 30px;
+}
+.footer-text{
+    margin-bottom: 0.65rem;
+}
+img:hover {
+    opacity: 0.4;
+  }
