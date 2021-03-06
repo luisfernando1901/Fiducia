@@ -27,12 +27,14 @@
   }
   
   .container2:hover .overlay {
-    opacity: 0.8;
+    opacity: 0.90;
   }
   
   .text {
     color: white;
-    font-size: 20px;
+    font-size: 23px;
+    font-family: cursive;
+    font-style: oblique;
     position: absolute;
     top: 50%;
     left: 50%;
