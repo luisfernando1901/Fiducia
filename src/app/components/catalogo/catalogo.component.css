@@ -1,0 +1,44 @@
+:host ::ng-deep .product-list-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+:host ::ng-deep .product-list-item .p-rating {
+    margin: 0 0 .5rem 0;
+}
+
+:host ::ng-deep .product-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+:host ::ng-deep .product-category{
+    padding-left: 0.5rem;
+}
+
+:host ::ng-deep .product-description {
+    margin: 0 0 1rem 0;
+}
+:host ::ng-deep .card {
+    padding: 2rem;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    margin: 1.5rem;
+    height: 300px;
+    width: 45%;
+    min-width: fit-content;
+}
+:host ::ng-deep .product-list-item .product-list-detail {
+    flex: 1 1 0;
+    padding-left: 2rem;
+}
+
+.card-img{
+    height: 180px;
+    width: auto;
+}
+:host ::ng-deep .p-nogutter{
+    justify-content: center;
+}

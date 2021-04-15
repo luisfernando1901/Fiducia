@@ -1,0 +1,17 @@
+.d-flex{
+    height: 60%;
+}
+form{
+    width: -webkit-fill-available;
+}
+.login{
+    background-color: white;
+    width: 350px;
+    height: 380px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+
+}

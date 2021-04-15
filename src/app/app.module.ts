@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing } from './routes';
-
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -17,6 +18,15 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { NovedadesComponent } from './components/novedades/novedades.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CatalogoComponent } from './components/catalogo/catalogo.component';
+import { RouterModule } from '@angular/router';
+//Módulos de PrimeNg
+import {DataViewModule} from 'primeng/dataview';
+import {RatingModule} from 'primeng/rating';
+import { FormsModule } from '@angular/forms';
+import {InputTextModule} from 'primeng/inputtext';
+import {DropdownModule} from 'primeng/dropdown';
+import { AdminPageComponent } from './components/administrador/admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +42,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BoxFloresComponent,
     InicioComponent,
     NovedadesComponent,
-    ContactoComponent
+    ContactoComponent,
+    CatalogoComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     routing,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DataViewModule,
+    RatingModule,
+    FormsModule,
+    InputTextModule,
+    DropdownModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
