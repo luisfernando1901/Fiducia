@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing } from './routes';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
@@ -27,6 +28,8 @@ import { FormsModule } from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
 import { AdminPageComponent } from './components/administrador/admin-page/admin-page.component';
+import { AdminContentComponent } from './components/administrador/admin-content/admin-content.component';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { AdminPageComponent } from './components/administrador/admin-page/admin-
     NovedadesComponent,
     ContactoComponent,
     CatalogoComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    AdminContentComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,8 @@ import { AdminPageComponent } from './components/administrador/admin-page/admin-
     FormsModule,
     InputTextModule,
     DropdownModule,
-    RouterModule
+    RouterModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
