@@ -1,11 +1,11 @@
-<p-dataView #dv [value]="itemsFiltered" layout="grid" filterBy="categoria">
+<p-dataView #dv [value]="itemsFiltered" layout="grid" filterBy="nombre">
     <p-header>
         <span class="p-input-icon-left p-mb-2 p-mb-md-0">
             <i class="pi pi-search"></i>
             <input type="search" pInputText placeholder="Buscar por nombre" (input)="dv.filter($event.target.value)">
         </span>
         <!--Se me ocurre manipular la lista de "items" que se maneja arriba en el dataview, puede funcionar-->
-        <p-dropdown [options]="items" [(ngModel)]="seleccionado" optionLabel="categoria" (onChange)="cambio()"></p-dropdown>
+        <p-dropdown [options]="categorias" [(ngModel)]="seleccionado" (onChange)="cambio()"></p-dropdown>
     </p-header>
     <ng-template let-item pTemplate="gridItem">
         <div class="card">
