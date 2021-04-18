@@ -34,7 +34,9 @@ export class CatalogoComponent implements OnInit {
     this.fireStore.collection('tienda').doc('categorias').valueChanges().subscribe(params=>{  
       let aux:string[] = ['todas las categorías'];
       //this.categorias = params['tienda']['categorias'];
+      console.log('Imprimimos las categorías');
       this.categorias = aux.concat(params['tienda']['categorias']);
+      console.log(this.categorias);
       this.buscarCatalogo();
     });
     
@@ -79,7 +81,7 @@ export class CatalogoComponent implements OnInit {
           else{
             reject('No se pudo cargar el catálogo');
           }
-      },3000);
+      },2000);
     });
 
     await promise.then(param=>console.log(param));

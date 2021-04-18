@@ -2,36 +2,37 @@
     <h2>Agregar items</h2>
 </div>
 <hr>
+<p-toast position="top-right"></p-toast>
 <div class="container-fluid">
     <div class="box">
-        <form>
+        <form [formGroup]='newItem' (ngSubmit)='agregar()'>
             <div class="form-group">
                 <label>Nombre</label>
-                <input #nombre type="text" class="form-control" aria-describedby="emailHelp">
+                <input formControlName='nombre' type="text" class="form-control" aria-describedby="emailHelp">
             </div>
             <div class="form-group">
                 <label>Descripción</label>
-                <textarea #descripcion class="form-control" rows="3"></textarea>
-              </div>
+                <textarea formControlName='descripcion' class="form-control" rows="3"></textarea>
+            </div>
             <div class="form-group">
                 <label>Categoría</label>
-                <select #categoria class="form-control">
-                    <option>Ramos</option>
-                    <option>Box floral</option>
-                    <option>Peluches</option>
-                    <option>Globos</option>
-                    <option>Cajas personalizadas</option>
+                <select formControlName='categoria' class="form-control">
+                    <option>ramos</option>
+                    <option>box floral</option>
+                    <option>peluches</option>
+                    <option>globos</option>
+                    <option>cajas personalizadas</option>
                 </select>
             </div>
             <div class="form-group">
                 <label>Precio (S/.)</label>
-                <input #precio type="number" class="form-control">
+                <input formControlName='precio' type="number" class="form-control">
             </div>
             <div class="form-group">
                 <label>Rating (1-5)</label>
-                <input #rating type="number" class="form-control">
+                <input formControlName='rating' type="number" class="form-control">
             </div>
-            <button (click)="agregar(nombre.value, descripcion.value, categoria.value, precio.value, rating.value)" class="btn btn-primary">Agregar al catálogo</button>
+            <button type="submit" class="btn btn-primary">Agregar al catálogo</button>
         </form>
     </div>
 </div>

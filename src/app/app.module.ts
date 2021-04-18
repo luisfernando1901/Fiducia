@@ -20,15 +20,21 @@ import { NovedadesComponent } from './components/novedades/novedades.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
+import { AdminPageComponent } from './components/administrador/admin-page/admin-page.component';
+import { AdminContentComponent } from './components/administrador/admin-content/admin-content.component';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 //Módulos de PrimeNg
 import {DataViewModule} from 'primeng/dataview';
 import {RatingModule} from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
-import { AdminPageComponent } from './components/administrador/admin-page/admin-page.component';
-import { AdminContentComponent } from './components/administrador/admin-content/admin-content.component';
+import {ToastModule} from 'primeng/toast';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {MessageService} from 'primeng/api';
+
 
 
 @NgModule({
@@ -61,9 +67,13 @@ import { AdminContentComponent } from './components/administrador/admin-content/
     InputTextModule,
     DropdownModule,
     RouterModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    ReactiveFormsModule,
+    ToastModule,
+    MessagesModule,
+    MessageModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
