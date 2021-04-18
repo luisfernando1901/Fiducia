@@ -12,6 +12,7 @@
 :host ::ng-deep .product-name {
     font-size: 1.5rem;
     font-weight: 700;
+    margin-bottom: 10px;
 }
 
 :host ::ng-deep .product-category{
