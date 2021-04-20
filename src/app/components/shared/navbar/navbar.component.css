@@ -6,3 +6,24 @@
     font-family: 'Brush Script MT', cursive;
     font-size: 45px;
 }
+
+.p-input-icon-left{
+    margin-right: 100px;
+    min-width: auto;
+}
+
+.searchBar{
+    width: 600px;
+    border-radius: 20px;
+}
+
+.icons{
+    width: 25px;
+}
+
+@media screen and (max-width: 600px) {
+    .searchBar{
+        width: 100px;
+        border-radius: 20px;
+    }
+  }

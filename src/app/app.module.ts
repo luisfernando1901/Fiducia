@@ -34,6 +34,8 @@ import {ToastModule} from 'primeng/toast';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {MessageService} from 'primeng/api';
+import {MenubarModule} from 'primeng/menubar';
+
 
 
 
@@ -71,7 +73,8 @@ import {MessageService} from 'primeng/api';
     ReactiveFormsModule,
     ToastModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    MenubarModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

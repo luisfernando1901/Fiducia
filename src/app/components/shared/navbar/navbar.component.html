@@ -3,12 +3,34 @@
         <img src="../../../../assets/icons/logo.jpeg" alt="" width="50" height="50" class="d-inline-block align-top">
         Fiducia
     </a>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
       <ul class="navbar-nav">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input class="searchBar" type="text" pInputText placeholder="Search"/>
+        </span>
+        <li class=" nav-item d-inline-flex">
+          <i class="pi pi-phone mr-1 mt-1" style="font-size: 1.5rem"></i>
+          <a class="nav-link" [routerLink]="[ '/' ]" routerLinkActive="active">+51 983 641 807</a>
+        </li>
         <li class="nav-item active">
+          <a class="nav-link" [routerLink]="[ '/' ]" routerLinkActive="active">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="[ '/Novedades' ]" routerLinkActive="active">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <img src="../../../../assets/icons/user.png" alt="" class="icons mr-1 mt-1">
+        </li>
+        
+
+        <!--
+
+          <li class="nav-item active">
           <a class="nav-link" [routerLink]="[ '/' ]" routerLinkActive="active">Inicio</a>
         </li>
         <li class="nav-item">
@@ -28,6 +50,13 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="[ '/Contacto' ]" routerLinkActive="active">Contacto</a>
         </li>
+
+
+        -->
       </ul>
     </div>
   </nav>
+<!--Aqui viene la segunda fila de categorías del Navbar-->
+<p-menubar [model]="items">
+  <div>hola</div>
+</p-menubar>
