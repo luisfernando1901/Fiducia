@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
           { label: 'Box floral' },
           { label: 'Peluches' },
           { label: 'Globos' },
-          { label: 'Cajas pe' }
+          { label: 'Cajas personalizadas' }
         ]
       }
     ];

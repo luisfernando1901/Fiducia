@@ -21,6 +21,9 @@
     width: 25px;
 }
 
+:host ::ng-deep div .p-menubar-end {
+    margin-left: 0px;
+}
 @media screen and (max-width: 600px) {
     .searchBar{
         width: 100px;
