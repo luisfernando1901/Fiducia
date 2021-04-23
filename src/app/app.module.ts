@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { routing } from './routes';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
@@ -74,7 +75,8 @@ import {MenubarModule} from 'primeng/menubar';
     ToastModule,
     MessagesModule,
     MessageModule,
-    MenubarModule
+    MenubarModule,
+    AngularFireStorageModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
