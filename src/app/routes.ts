@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { AdminContentComponent } from './components/administrador/admin-content/admin-content.component';
 import { AdminPageComponent } from './components/administrador/admin-page/admin-page.component';
 import { BoxFloralComponent } from './components/box-floral/box-floral.component';
@@ -18,7 +19,7 @@ const appRoutes = [
     { path: 'Detalles/Flores', component: BoxFloresComponent,  pathMatch: 'full'},
     { path: 'Contacto', component: ContactoComponent,  pathMatch: 'full'},
     { path: 'fiduciaAdmin', component: AdminPageComponent,  pathMatch: 'full'},
-    { path: 'fiduciaAdmin/content', component: AdminContentComponent,  pathMatch: 'full'},
+    { path: 'fiduciaAdmin/content', component: AdminContentComponent,  pathMatch: 'full', canActivate: [AngularFireAuthGuard] },
 
 ];
 
