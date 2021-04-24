@@ -47,7 +47,7 @@ export class AdminContentComponent implements OnInit {
       this.newItem.value['url'] = params;
     });
     //Añadimos el item a nuestra colección de tienda en firebase
-    await this.fireStore.collection('tienda').doc('categorias').collection(this.newItem.value['categoria']).add(this.newItem.value)
+    await this.fireStore.collection('tienda').doc('categorias').collection('items').add(this.newItem.value)
       .then(params => {
         this.messageService.add({ severity: 'success', summary: `${this.newItem.value['nombre']} agregado!`, detail: 'Se agregó el nuevo item exitosamente!' });
         //Limpiamos los valores del forms
