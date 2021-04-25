@@ -5,6 +5,7 @@ import {MessageService} from 'primeng/api';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Validators } from '@angular/forms';
 
 
 @Component({
@@ -18,11 +19,11 @@ export class AdminContentComponent implements OnInit {
   fileRef:AngularFireStorageReference;
 
   newItem = this.fb.group({
-    nombre: [''],
-    descripcion: [''],
-    categoria: [''],
-    precio: [''],
-    rating: [''],
+    nombre: ['', Validators.required],
+    descripcion: ['', Validators.required],
+    categoria: ['', Validators.required],
+    precio: ['', Validators.required],
+    rating: ['', Validators.required],
     url:['']
   });
 
@@ -37,25 +38,34 @@ export class AdminContentComponent implements OnInit {
   }
 
   async agregar() {
+    this.messageService.clear();
+    let image_saved: boolean = false;
+    //Mensaje de espera
+    this.messageService.add({ severity: 'info', summary: 'Por favor espere...', detail: '', sticky: true });
     //Subimos primero la imagen y obtenemos el URL de la imagen guardada
-    await this.storage.upload(this.filePath, this.file).then(params=>{
+    await this.storage.upload(this.filePath, this.file).then(params => {
       console.log('Imagen subida');
+      image_saved = true;
     });
-    //Obtenemos la URL
-    await this.fileRef.getDownloadURL().toPromise().then(params=>{
-      console.log(params);
-      this.newItem.value['url'] = params;
-    });
-    //Añadimos el item a nuestra colección de tienda en firebase
-    await this.fireStore.collection('tienda').doc('categorias').collection('items').add(this.newItem.value)
-      .then(params => {
-        this.messageService.add({ severity: 'success', summary: `${this.newItem.value['nombre']} agregado!`, detail: 'Se agregó el nuevo item exitosamente!' });
-        //Limpiamos los valores del forms
-        this.newItem.reset();
-      })
-      .catch(err => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar el nuevo item, por favor intente de nuevo' });
+    if (image_saved) {
+      //Obtenemos la URL
+      await this.fileRef.getDownloadURL().toPromise().then(params => {
+        console.log(params);
+        this.newItem.value['url'] = params;
       });
+      //Añadimos el item a nuestra colección de tienda en firebase
+      await this.fireStore.collection('tienda').doc('categorias').collection('items').add(this.newItem.value)
+        .then(params => {
+          this.messageService.clear();
+          this.messageService.add({ severity: 'success', summary: `${this.newItem.value['nombre']} agregado!`, detail: 'Se agregó el nuevo item exitosamente!' });
+          //Limpiamos los valores del forms
+          this.newItem.reset();
+        })
+        .catch(err => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo agregar el nuevo item, por favor intente de nuevo' });
+        });
+
+    }
   }
 
   uploadFile(event:any) {
