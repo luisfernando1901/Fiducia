@@ -38,11 +38,12 @@ export class AdminContentComponent implements OnInit {
   }
 
   async agregar() {
+    //Limpiamos los mensajes anteriores
     this.messageService.clear();
     let image_saved: boolean = false;
     //Mensaje de espera
     this.messageService.add({ severity: 'info', summary: 'Por favor espere...', detail: '', sticky: true });
-    //Subimos primero la imagen y obtenemos el URL de la imagen guardada
+    //Subimos la imagen (aqui debo ver como manejo los errores para agregar el message de que debe agregar imagen, OJO que el then solo va para promesas, ya que el catch implementado no lo detecta)
     await this.storage.upload(this.filePath, this.file).then(params => {
       console.log('Imagen subida');
       image_saved = true;
