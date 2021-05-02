@@ -18,8 +18,4 @@ export class AppComponent {
       spinner.hide();
     }, 5000);
   }
-
-  ngOnInit() {
-
-  }
 }
