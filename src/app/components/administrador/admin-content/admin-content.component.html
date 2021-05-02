@@ -1,43 +1,73 @@
-<div class="container-fluid">
-    <h2>Agregar items</h2>
-</div>
-<hr>
+<p-tabView>
+    <p-tabPanel header="Agregar Items">
+        <div class="container-fluid">
+            <div class="box">
+                <form [formGroup]='newItem' (ngSubmit)='agregar()' class="was-validated">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input formControlName='nombre' type="text" class="form-control is-invalid" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea formControlName='descripcion' class="form-control is-invalid" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoría</label>
+                        <select formControlName='categoria' class="form-control is-invalid" required>
+                            <option>ramos</option>
+                            <option>box floral</option>
+                            <option>peluches</option>
+                            <option>globos</option>
+                            <option>cajas personalizadas</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Precio (S/.)</label>
+                        <input formControlName='precio' type="number" class="form-control is-invalid" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Rating (1-5)</label>
+                        <input formControlName='rating' type="number" class="form-control is-invalid" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Seleccionar imagen</label>
+                        <input type="file" (change)="uploadFile($event)">
+                    </div>
+                    <button type="submit" [disabled]="newItem.invalid" class="btn btn-primary">Agregar al catálogo</button>
+                    <button class="btn btn-secondary" (click)="logout()">Salir de vista administrador/a</button>
+                </form>
+            </div>
+        </div>
+    </p-tabPanel>
+    <p-tabPanel header="Editar Items">
+        <p-confirmDialog header="Confirmación" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+        <p-table [value]="listaEditables">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Imagen</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    <th>Rating</th>
+                    <th>Opciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-editable>
+                <tr>
+                    <td>{{editable.nombre}}</td>
+                    <td><img [src]="editable.url" [alt]="editable.name" width="50" class="p-shadow-4" /></td>
+                    <td>{{editable.descripcion}}</td>
+                    <td>{{editable.categoria}}</td>
+                    <td>S/. {{editable.precio}}</td>
+                    <td><p-rating [ngModel]="editable.rating" [readonly]="true" [cancel]="false"></p-rating></td>
+                    <td>
+                        <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editar()"></button>
+                        <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="eliminar(editable.nombre)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-tabPanel>
+</p-tabView>
 <p-toast position="top-right"></p-toast>
-<div class="container-fluid">
-    <div class="box">
-        <form [formGroup]='newItem' (ngSubmit)='agregar()' class="was-validated">
-            <div class="form-group">
-                <label>Nombre</label>
-                <input formControlName='nombre' type="text" class="form-control is-invalid" required>
-            </div>
-            <div class="form-group">
-                <label>Descripción</label>
-                <textarea formControlName='descripcion' class="form-control is-invalid" rows="3" required></textarea>
-            </div>
-            <div class="form-group">
-                <label>Categoría</label>
-                <select formControlName='categoria' class="form-control is-invalid" required>
-                    <option>ramos</option>
-                    <option>box floral</option>
-                    <option>peluches</option>
-                    <option>globos</option>
-                    <option>cajas personalizadas</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Precio (S/.)</label>
-                <input formControlName='precio' type="number" class="form-control is-invalid" required>
-            </div>
-            <div class="form-group">
-                <label>Rating (1-5)</label>
-                <input formControlName='rating' type="number" class="form-control is-invalid" required>
-            </div>
-            <div class="form-group">
-                <label>Seleccionar imagen</label>
-                <input type="file" (change)="uploadFile($event)">
-            </div>
-            <button type="submit" [disabled]="newItem.invalid" class="btn btn-primary">Agregar al catálogo</button>
-            <button class="btn btn-secondary" (click)="logout()">Salir de vista administrador/a</button>
-        </form>
-    </div>
-</div>

@@ -36,6 +36,14 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {MessageService} from 'primeng/api';
 import {MenubarModule} from 'primeng/menubar';
+import {TabViewModule} from 'primeng/tabview';
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+//Declaramos los servicios
+import { CatalogoService } from './services/catalogo.service';
+
 
 
 
@@ -76,9 +84,13 @@ import {MenubarModule} from 'primeng/menubar';
     MessagesModule,
     MessageModule,
     MenubarModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    TabViewModule,
+    TableModule,
+    ButtonModule,
+    ConfirmDialogModule  
   ],
-  providers: [MessageService],
+  providers: [MessageService,CatalogoService,ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

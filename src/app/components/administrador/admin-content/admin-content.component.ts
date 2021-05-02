@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder } from '@angular/forms';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
+import { CatalogoService } from 'src/app/services/catalogo.service';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -14,10 +17,12 @@ import { Validators } from '@angular/forms';
   styleUrls: ['./admin-content.component.css']
 })
 export class AdminContentComponent implements OnInit {
+  //Variables para la primera pestaña
   file:any;
   filePath:string;
   fileRef:AngularFireStorageReference;
-
+  subscripcion1:Subscription;
+  subscripcion2:Subscription;
   newItem = this.fb.group({
     nombre: ['', Validators.required],
     descripcion: ['', Validators.required],
@@ -26,17 +31,27 @@ export class AdminContentComponent implements OnInit {
     rating: ['', Validators.required],
     url:['']
   });
+  //Variables para la segunda pestaña
+  listaEditables:object[] = [];
 
   constructor(private fireStore:AngularFirestore,
               private fb:FormBuilder,
               private messageService: MessageService,
               private storage: AngularFireStorage,
               private auth:AngularFireAuth,
-              private router:Router) { }
+              private router:Router,
+              private catalogoService:CatalogoService,
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
+    this.subscripcion1 = this.catalogoService.obtenerItems().subscribe(params=>{
+      console.log(params);
+      this.listaEditables = params;
+      this.subscripcion1.unsubscribe();
+    });
   }
 
+  //Aqui vienen las funciones para la pestaña de "Agregar Items"
   async agregar() {
     //Limpiamos los mensajes anteriores
     this.messageService.clear();
@@ -81,6 +96,27 @@ export class AdminContentComponent implements OnInit {
   async logout() {
     await this.auth.signOut();
     this.router.navigate(['fiduciaAdmin']);
+
+  }
+
+  //Aqui vienen las funciones para la pestaña de "Editar Items"
+  eliminar(item:string){
+    this.confirmationService.confirm({
+      message: `Estas seguro/a que deseas eliminar "${item}" ?`,
+      accept: () => {
+          //Actual logic to perform a confirmation
+          this.subscripcion2 = this.catalogoService.obtenerDocId(item).subscribe( async params=>{
+            let codigoDoc = params[0]['payload']['doc']['id'];
+            this.subscripcion2.unsubscribe();
+            await this.catalogoService.eliminarItem(codigoDoc)
+            .then(then => this.messageService.add({severity:'success', summary:'Eliminado con éxito!'}))
+            .catch(err => this.messageService.add({severity:'error', summary:'No se pudo eliminar'}));
+          });
+      }
+  });
+  }
+
+  editar(){
 
   }
 }
