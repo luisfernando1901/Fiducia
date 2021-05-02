@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder } from '@angular/forms';
-import {ConfirmationService, MessageService} from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { CatalogoService } from 'src/app/services/catalogo.service';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -18,33 +17,43 @@ import { map } from 'rxjs/operators';
 })
 export class AdminContentComponent implements OnInit {
   //Variables para la primera pestaña
-  file:any;
-  filePath:string;
-  fileRef:AngularFireStorageReference;
-  subscripcion1:Subscription;
-  subscripcion2:Subscription;
+  file: any;
+  filePath: string;
+  fileRef: AngularFireStorageReference;
+  subscripcion1: Subscription;
+  subscripcion2: Subscription;
+  subscripcion3: Subscription;
   newItem = this.fb.group({
     nombre: ['', Validators.required],
     descripcion: ['', Validators.required],
     categoria: ['', Validators.required],
     precio: ['', Validators.required],
     rating: ['', Validators.required],
-    url:['']
+    url: ['']
+  });
+  newItemEditable = this.fb.group({
+    nombre: ['', Validators.required],
+    descripcion: ['', Validators.required],
+    categoria: ['', Validators.required],
+    precio: ['', Validators.required],
+    rating: ['', Validators.required],
   });
   //Variables para la segunda pestaña
-  listaEditables:object[] = [];
+  listaEditables: object[] = [];
+  product: object;
+  productDialog: boolean;
 
-  constructor(private fireStore:AngularFirestore,
-              private fb:FormBuilder,
-              private messageService: MessageService,
-              private storage: AngularFireStorage,
-              private auth:AngularFireAuth,
-              private router:Router,
-              private catalogoService:CatalogoService,
-              private confirmationService: ConfirmationService) { }
+  constructor(private fireStore: AngularFirestore,
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private storage: AngularFireStorage,
+    private auth: AngularFireAuth,
+    private router: Router,
+    private catalogoService: CatalogoService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    this.subscripcion1 = this.catalogoService.obtenerItems().subscribe(params=>{
+    this.subscripcion1 = this.catalogoService.obtenerItems().subscribe(params => {
       console.log(params);
       this.listaEditables = params;
       this.subscripcion1.unsubscribe();
@@ -84,7 +93,7 @@ export class AdminContentComponent implements OnInit {
     }
   }
 
-  uploadFile(event:any) {
+  uploadFile(event: any) {
     //Se obtiene el archivo
     this.file = event.target.files[0];
     //La ruta en el repositorio
@@ -100,23 +109,48 @@ export class AdminContentComponent implements OnInit {
   }
 
   //Aqui vienen las funciones para la pestaña de "Editar Items"
-  eliminar(item:string){
+  eliminar(item: string) {
     this.confirmationService.confirm({
       message: `Estas seguro/a que deseas eliminar "${item}" ?`,
       accept: () => {
-          //Actual logic to perform a confirmation
-          this.subscripcion2 = this.catalogoService.obtenerDocId(item).subscribe( async params=>{
-            let codigoDoc = params[0]['payload']['doc']['id'];
-            this.subscripcion2.unsubscribe();
-            await this.catalogoService.eliminarItem(codigoDoc)
-            .then(then => this.messageService.add({severity:'success', summary:'Eliminado con éxito!'}))
-            .catch(err => this.messageService.add({severity:'error', summary:'No se pudo eliminar'}));
-          });
+        //Actual logic to perform a confirmation
+        this.subscripcion2 = this.catalogoService.obtenerDocId(item).subscribe(async params => {
+          let codigoDoc = params[0]['payload']['doc']['id'];
+          this.subscripcion2.unsubscribe();
+          await this.catalogoService.eliminarItem(codigoDoc)
+            .then(then => this.messageService.add({ severity: 'success', summary: 'Eliminado con éxito!' }))
+            .catch(err => this.messageService.add({ severity: 'error', summary: 'No se pudo eliminar' }));
+        });
       }
-  });
+    });
   }
+
+  dialogEditar(editable: object) {
+    this.product = editable;
+    this.newItemEditable.setValue({
+      nombre: this.product['nombre'],
+      descripcion: this.product['descripcion'],
+      categoria: this.product['categoria'],
+      precio: this.product['precio'],
+      rating: this.product['rating']
+    });
+    this.productDialog = true;
+  }
+
+  hideDialog() {
+    this.productDialog = false;
+}
 
   editar(){
-
+    this.subscripcion3 = this.catalogoService.obtenerDocId(this.product['nombre']).subscribe(async params =>{
+      let codigoDoc = params[0]['payload']['doc']['id'];
+      this.subscripcion3.unsubscribe();
+      await this.catalogoService.editarItem(codigoDoc,this.newItemEditable.value)
+      .then(param => this.messageService.add({ severity: 'success', summary: 'Editado con éxito!' }))
+      .catch(err => this.messageService.add({ severity: 'error', summary: 'No se pudo editar' }));
+      this.hideDialog();
+      this.newItemEditable.reset();
+    });
   }
+
 }

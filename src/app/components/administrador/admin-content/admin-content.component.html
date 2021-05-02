@@ -62,7 +62,7 @@
                     <td>S/. {{editable.precio}}</td>
                     <td><p-rating [ngModel]="editable.rating" [readonly]="true" [cancel]="false"></p-rating></td>
                     <td>
-                        <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editar()"></button>
+                        <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="dialogEditar(editable)"></button>
                         <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="eliminar(editable.nombre)"></button>
                     </td>
                 </tr>
@@ -70,4 +70,41 @@
         </p-table>
     </p-tabPanel>
 </p-tabView>
+<p-dialog [(visible)]="productDialog" [style]="{width: '500px'}" header="Detalles de producto" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <img [src]="product['url']" [alt]="product['nombre']" class="product-image" *ngIf="product['url']" style="width: 150px;">
+        <form [formGroup]='newItemEditable' class="was-validated">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input formControlName='nombre' type="text" class="form-control is-invalid" required>
+            </div>
+            <div class="form-group">
+                <label>Descripción</label>
+                <textarea formControlName='descripcion' class="form-control is-invalid" rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Categoría</label>
+                <select formControlName='categoria' class="form-control is-invalid" required>
+                    <option>ramos</option>
+                    <option>box floral</option>
+                    <option>peluches</option>
+                    <option>globos</option>
+                    <option>cajas personalizadas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Precio (S/.)</label>
+                <input formControlName='precio' type="number" class="form-control is-invalid" required>
+            </div>
+            <div class="form-group">
+                <label>Rating (1-5)</label>
+                <input formControlName='rating' type="number" class="form-control is-invalid" required>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" [disabled]="newItemEditable.invalid" icon="pi pi-check" class="p-button-text" (click)="editar()"></button>
+    </ng-template>
+</p-dialog>
 <p-toast position="top-right"></p-toast>

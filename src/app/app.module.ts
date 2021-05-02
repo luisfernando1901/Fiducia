@@ -42,6 +42,7 @@ import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {DialogModule} from 'primeng/dialog';
 //Declaramos los servicios
 import { CatalogoService } from './services/catalogo.service';
 
@@ -90,7 +91,8 @@ import { CatalogoService } from './services/catalogo.service';
     TableModule,
     ButtonModule,
     ConfirmDialogModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    DialogModule
   ],
   providers: [MessageService,CatalogoService,ConfirmationService],
   bootstrap: [AppComponent]

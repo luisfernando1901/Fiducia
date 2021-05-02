@@ -16,6 +16,10 @@ export class CatalogoService {
     return this.fireStore.collection('tienda').doc('categorias').collection('items', ref => ref.where('nombre', '==', nombre)).snapshotChanges()
   }
 
+  editarItem(docId:string,data:object){
+    return this.fireStore.collection('tienda').doc('categorias').collection('items').doc(docId).update(data);
+  }
+
   eliminarItem(docId:string){
     return this.fireStore.collection('tienda').doc('categorias').collection('items').doc(docId).delete();
   }
