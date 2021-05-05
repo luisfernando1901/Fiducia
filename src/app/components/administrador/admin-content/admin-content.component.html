@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label>Seleccionar imagen</label>
-                        <input type="file" (change)="uploadFile($event)">
+                        <input [disabled]="newItem.invalid" type="file" (change)="uploadFile($event)">
                     </div>
                     <button type="submit" [disabled]="newItem.invalid" class="btn btn-primary">Agregar al catálogo</button>
                     <button class="btn btn-secondary" (click)="logout()">Salir de vista administrador/a</button>

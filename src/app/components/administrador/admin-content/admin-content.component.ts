@@ -38,6 +38,7 @@ export class AdminContentComponent implements OnInit {
     precio: ['', Validators.required],
     rating: ['', Validators.required],
   });
+  fotoHabilitada:boolean = true;
   //Variables para la segunda pestaña
   listaEditables: object[] = [];
   product: object;
