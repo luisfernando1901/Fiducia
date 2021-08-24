@@ -1,6 +1,6 @@
 .altura{
     min-height: 83.4px;
-    background-color: #f4f3f3;
+    background-color: #fff5f0;
 }
 .marca{
     font-family: 'Brush Script MT', cursive;
@@ -24,9 +24,10 @@
 :host ::ng-deep div .p-menubar-end {
     margin-left: 0px;
 }
+
 @media screen and (max-width: 600px) {
     .searchBar{
         width: 100px;
         border-radius: 20px;
     }
-  }
+}
